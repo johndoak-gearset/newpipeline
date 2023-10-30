@@ -36,7 +36,7 @@ public class Names {
         'Lucas',
         'Jacob',
         'Thomas',
-        'Alfie',
+        'Alexander',
         'Alfred',
         'Max',
         'Finlay',
@@ -87,16 +87,17 @@ public class Names {
         'Wilson',
         'Johnson',
         'Davies',
+        'Driver' ,
+        'Morrison' ,
         'Robinson',
         'Wright',
-        'Thompson',
         'Evans',
         'Walker',
         'White',
         'Roberts',
         'Green',
         'Hall',
-        'Wood',
+        'Boyle',
         'Jackson',
         'Clarke'
     };
@@ -107,7 +108,7 @@ public class Names {
         ' Limited',
         'Gen',
         'ly',
-        ' Plastics',
+        ' Manufacturing',
         ' Finance',
         ' Group'
     };
