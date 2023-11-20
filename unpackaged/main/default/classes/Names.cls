@@ -1,11 +1,9 @@
 public class Names {
     public static List<String> FirstNames = new List<String>{
+        'Olivia',
         'Emily',
-        'Sarah',
-        'Steve',
         'Isla',
         'Amelia',
-        'Alex',
         'Ella',
         'Ava',
         'Grace',
