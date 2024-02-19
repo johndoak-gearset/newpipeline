@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NavigationMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <container>Gearset Academy</container>
+    <containerType>Network</containerType>
+    <label>Default User Profile Menu</label>
+    <navigationMenuItem>
+        <label>Profile</label>
+        <menuItemBranding>
+            <tileImage>John_D</tileImage>
+        </menuItemBranding>
+        <position>1</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/profile/home</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Settings</label>
+        <menuItemBranding>
+            <tileImage>IMG_4532</tileImage>
+        </menuItemBranding>
+        <position>2</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/settings/home</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Account Management</label>
+        <menuItemBranding>
+            <tileImage>IMG_4533</tileImage>
+        </menuItemBranding>
+        <position>3</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/account-management</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Community Forum</label>
+        <menuItemBranding>
+            <tileImage>IMG_4534</tileImage>
+        </menuItemBranding>
+        <position>4</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/comm-my-account</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Messages</label>
+        <menuItemBranding>
+            <tileImage>IMG_4535</tileImage>
+        </menuItemBranding>
+        <position>5</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/messages/Home</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Contact Support</label>
+        <menuItemBranding>
+            <tileImage>IMG_4536</tileImage>
+        </menuItemBranding>
+        <position>6</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/contactsupport</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Experience Workspaces</label>
+        <position>7</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>ExperienceWorkspaces</target>
+        <type>SystemLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Experience Builder</label>
+        <position>8</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>ExperienceBuilder</target>
+        <type>SystemLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Salesforce Setup</label>
+        <position>9</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>Setup</target>
+        <type>SystemLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Log Out</label>
+        <position>10</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>Logout</target>
+        <type>Event</type>
+    </navigationMenuItem>
+</NavigationMenu>
