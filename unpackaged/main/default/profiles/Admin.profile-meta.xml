@@ -12,6 +12,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.DiscountPercentage__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Asset.AccountId</field>
         <readable>true</readable>
@@ -4805,4 +4810,8 @@
         <enabled>true</enabled>
         <name>WorkCalibrationUser</name>
     </userPermissions>
+    <classAccesses>
+        <apexClass>AdvancedDataManipulator</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
 </Profile>
