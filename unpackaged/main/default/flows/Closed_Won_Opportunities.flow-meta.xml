@@ -8,65 +8,15 @@
         <locationY>647</locationY>
         <actionName>NewTask</actionName>
         <actionType>quickAction</actionType>
-        <connector>
-            <targetReference>Onboarding_brief</targetReference>
-        </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>Subject</name>
-            <value>
-                <elementReference>Handover</elementReference>
-            </value>
-        </inputParameters>
         <inputParameters>
             <name>OwnerId</name>
             <value>
                 <elementReference>$User.Department</elementReference>
             </value>
         </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <description>Your account have expanded to new products, reach out to check they have everything they need</description>
-        <name>New_products_bought</name>
-        <label>New products bought</label>
-        <locationX>314</locationX>
-        <locationY>647</locationY>
-        <actionName>FeedItem.NewTaskFromFeedItem</actionName>
-        <actionType>quickAction</actionType>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>contextId</name>
-            <value>
-                <elementReference>$Record.Account.Owner.Id</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>Subject</name>
-            <value>
-                <elementReference>Handover</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>Description</name>
-            <value>
-                <elementReference>Handover</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>Onboarding_brief</name>
-        <label>Onboarding brief</label>
-        <locationX>50</locationX>
-        <locationY>755</locationY>
-        <actionName>FeedItem.NewTaskFromFeedItem</actionName>
-        <actionType>quickAction</actionType>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>contextId</name>
-            <value>
-                <elementReference>$Record.Owner.Username</elementReference>
-            </value>
-        </inputParameters>
+        <nameSegment>NewTask</nameSegment>
+        <versionSegment>1</versionSegment>
     </actionCalls>
     <actionCalls>
         <name>Spicy_meatball</name>
@@ -91,7 +41,9 @@
                 <elementReference>$Record.IsWon</elementReference>
             </value>
         </inputParameters>
+        <nameSegment>chatterPost</nameSegment>
         <storeOutputAutomatically>true</storeOutputAutomatically>
+        <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>56.0</apiVersion>
     <decisions>
@@ -99,18 +51,15 @@
         <label>Opp type</label>
         <locationX>182</locationX>
         <locationY>539</locationY>
-        <defaultConnector>
-            <targetReference>New_products_bought</targetReference>
-        </defaultConnector>
         <defaultConnectorLabel>Expansion</defaultConnectorLabel>
         <rules>
             <name>New_business</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.Account.RecordType.CreatedDate</leftValueReference>
+                <leftValueReference>$Record.CreatedDate</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>$Flow.CurrentDate</elementReference>
+                    <elementReference>$Record__Prior.Account.CreatedDate</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -201,23 +150,8 @@
     </start>
     <status>Draft</status>
     <textTemplates>
-        <name>Emailsubject</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Welcome to Gearset&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
-        <name>Handover</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Brief the appropriate CSM about their new account and identify COM&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
         <name>Meatballwon</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
         <text>&lt;p&gt;A new spicy meatball has been won&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
-        <name>Welcome_email</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Welcome to Gearset! &lt;/p&gt;</text>
     </textTemplates>
 </Flow>
