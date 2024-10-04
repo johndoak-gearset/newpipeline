@@ -1,124 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <actionCalls>
-        <description>Handover to CS</description>
-        <name>CSM_handover</name>
-        <label>CSM handover</label>
-        <locationX>50</locationX>
-        <locationY>647</locationY>
-        <actionName>NewTask</actionName>
-        <actionType>quickAction</actionType>
-        <connector>
-            <targetReference>Onboarding_brief</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>Subject</name>
-            <value>
-                <elementReference>Handover</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>OwnerId</name>
-            <value>
-                <elementReference>$User.Department</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <description>Your account have expanded to new products, reach out to check they have everything they need</description>
-        <name>New_products_bought</name>
-        <label>New products bought</label>
-        <locationX>314</locationX>
-        <locationY>647</locationY>
-        <actionName>FeedItem.NewTaskFromFeedItem</actionName>
-        <actionType>quickAction</actionType>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>contextId</name>
-            <value>
-                <elementReference>$Record.Account.Owner.Id</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>Subject</name>
-            <value>
-                <elementReference>Handover</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>Description</name>
-            <value>
-                <elementReference>Handover</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>Onboarding_brief</name>
-        <label>Onboarding brief</label>
-        <locationX>50</locationX>
-        <locationY>755</locationY>
-        <actionName>FeedItem.NewTaskFromFeedItem</actionName>
-        <actionType>quickAction</actionType>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>contextId</name>
-            <value>
-                <elementReference>$Record.Owner.Username</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>Spicy_meatball</name>
-        <label>Spicy meatball</label>
-        <locationX>182</locationX>
-        <locationY>431</locationY>
-        <actionName>chatterPost</actionName>
-        <actionType>chatterPost</actionType>
-        <connector>
-            <targetReference>Opp_type</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>text</name>
-            <value>
-                <elementReference>Meatballwon</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>subjectNameOrId</name>
-            <value>
-                <elementReference>$Record.IsWon</elementReference>
-            </value>
-        </inputParameters>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </actionCalls>
     <apiVersion>56.0</apiVersion>
-    <decisions>
-        <name>Opp_type</name>
-        <label>Opp type</label>
-        <locationX>182</locationX>
-        <locationY>539</locationY>
-        <defaultConnector>
-            <targetReference>New_products_bought</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Expansion</defaultConnectorLabel>
-        <rules>
-            <name>New_business</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Account.RecordType.CreatedDate</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <elementReference>$Flow.CurrentDate</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>CSM_handover</targetReference>
-            </connector>
-            <label>New business</label>
-        </rules>
-    </decisions>
     <description>If a high-value opportunity is closed and won, create a draft contract.</description>
     <environments>Default</environments>
     <interviewLabel>Closed Won Opportunities {!$Flow.CurrentDateTime}</interviewLabel>
@@ -146,11 +28,8 @@
         <description>Create a draft contract when an opportunity is won and is over 25,000</description>
         <name>Create_Draft_Contract</name>
         <label>Create Draft Contract</label>
-        <locationX>182</locationX>
-        <locationY>323</locationY>
-        <connector>
-            <targetReference>Spicy_meatball</targetReference>
-        </connector>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
         <inputAssignments>
             <field>AccountId</field>
             <value>
@@ -167,7 +46,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <start>
-        <locationX>56</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Create_Draft_Contract</targetReference>
@@ -185,39 +64,12 @@
             <field>Amount</field>
             <operator>GreaterThan</operator>
             <value>
-                <numberValue>250000.0</numberValue>
-            </value>
-        </filters>
-        <filters>
-            <field>IsWon</field>
-            <operator>EqualTo</operator>
-            <value>
-                <booleanValue>true</booleanValue>
+                <numberValue>25000.0</numberValue>
             </value>
         </filters>
         <object>Opportunity</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
-    <textTemplates>
-        <name>Emailsubject</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Welcome to Gearset&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
-        <name>Handover</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Brief the appropriate CSM about their new account and identify COM&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
-        <name>Meatballwon</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;A new spicy meatball has been won&lt;/p&gt;</text>
-    </textTemplates>
-    <textTemplates>
-        <name>Welcome_email</name>
-        <isViewedAsPlainText>false</isViewedAsPlainText>
-        <text>&lt;p&gt;Welcome to Gearset! &lt;/p&gt;</text>
-    </textTemplates>
+    <status>Active</status>
 </Flow>

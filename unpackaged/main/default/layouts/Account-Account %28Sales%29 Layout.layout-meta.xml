@@ -107,12 +107,12 @@
                 <field>SLA__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Total_Account_Value__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>DiscountPercentage__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Total_Account_Value__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
