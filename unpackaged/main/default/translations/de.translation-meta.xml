@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flowDefinitions>
+        <flows>
+            <textTemplates>
+                <name>Meatballwon</name>
+            </textTemplates>
+        </flows>
+        <fullName>Closed_Won_Opportunities</fullName>
+    </flowDefinitions>
+</Translations>
