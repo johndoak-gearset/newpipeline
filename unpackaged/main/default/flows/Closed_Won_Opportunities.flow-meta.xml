@@ -4,8 +4,8 @@
         <description>Handover to CS</description>
         <name>CSM_handover</name>
         <label>CSM handover</label>
-        <locationX>50</locationX>
-        <locationY>647</locationY>
+        <locationX>314</locationX>
+        <locationY>755</locationY>
         <actionName>NewTask</actionName>
         <actionType>quickAction</actionType>
         <connector>
@@ -26,10 +26,40 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
+        <name>Invoice_issued</name>
+        <label>Invoice issued</label>
+        <locationX>578</locationX>
+        <locationY>647</locationY>
+        <actionName>NewEvent</actionName>
+        <actionType>quickAction</actionType>
+        <connector>
+            <targetReference>Notify_AM</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>StartDateTime</name>
+            <value>
+                <elementReference>$System.OriginDateTime</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>EndDateTime</name>
+            <value>
+                <elementReference>$Record.CloseDate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
         <description>Your account have expanded to new products, reach out to check they have everything they need</description>
         <name>New_products_bought</name>
         <label>New products bought</label>
-        <locationX>314</locationX>
+        <locationX>842</locationX>
         <locationY>647</locationY>
         <actionName>FeedItem.NewTaskFromFeedItem</actionName>
         <actionType>quickAction</actionType>
@@ -54,10 +84,25 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
+        <name>Notify_AM</name>
+        <label>Notify AM</label>
+        <locationX>578</locationX>
+        <locationY>755</locationY>
+        <actionName>NewTask</actionName>
+        <actionType>quickAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>OwnerId</name>
+            <value>
+                <elementReference>$Record.Owner.Account.Owner.AccountId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>Onboarding_brief</name>
         <label>Onboarding brief</label>
-        <locationX>50</locationX>
-        <locationY>755</locationY>
+        <locationX>314</locationX>
+        <locationY>863</locationY>
         <actionName>FeedItem.NewTaskFromFeedItem</actionName>
         <actionType>quickAction</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -69,9 +114,39 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
+        <name>Send_Email_Action_1</name>
+        <label>SMB handover email</label>
+        <locationX>50</locationX>
+        <locationY>755</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.ContactId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Emailsubject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Welcome_email</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>Spicy_meatball</name>
         <label>Spicy meatball</label>
-        <locationX>182</locationX>
+        <locationX>512</locationX>
         <locationY>431</locationY>
         <actionName>chatterPost</actionName>
         <actionType>chatterPost</actionType>
@@ -95,9 +170,35 @@
     </actionCalls>
     <apiVersion>56.0</apiVersion>
     <decisions>
+        <description>Over 75k value</description>
+        <name>Enterprise_value</name>
+        <label>Enterprise value</label>
+        <locationX>182</locationX>
+        <locationY>647</locationY>
+        <defaultConnector>
+            <targetReference>CSM_handover</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>High value</defaultConnectorLabel>
+        <rules>
+            <name>Low_value</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Amount</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>75000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Email_Action_1</targetReference>
+            </connector>
+            <label>Low value</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Opp_type</name>
         <label>Opp type</label>
-        <locationX>182</locationX>
+        <locationX>512</locationX>
         <locationY>539</locationY>
         <defaultConnector>
             <targetReference>New_products_bought</targetReference>
@@ -107,16 +208,31 @@
             <name>New_business</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.Account.RecordType.CreatedDate</leftValueReference>
-                <operator>EqualTo</operator>
+                <leftValueReference>$Record.Name</leftValueReference>
+                <operator>Contains</operator>
                 <rightValue>
-                    <elementReference>$Flow.CurrentDate</elementReference>
+                    <stringValue>New</stringValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>CSM_handover</targetReference>
+                <targetReference>Enterprise_value</targetReference>
             </connector>
             <label>New business</label>
+        </rules>
+        <rules>
+            <name>Renewal</name>
+            <conditionLogic>1</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.SBQQ__Renewal__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Invoice_issued</targetReference>
+            </connector>
+            <label>Renewal</label>
         </rules>
     </decisions>
     <description>If a high-value opportunity is closed and won, create a draft contract.</description>
@@ -146,7 +262,7 @@
         <description>Create a draft contract when an opportunity is won and is over 25,000</description>
         <name>Create_Draft_Contract</name>
         <label>Create Draft Contract</label>
-        <locationX>182</locationX>
+        <locationX>512</locationX>
         <locationY>323</locationY>
         <connector>
             <targetReference>Spicy_meatball</targetReference>
@@ -167,7 +283,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <start>
-        <locationX>56</locationX>
+        <locationX>386</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Create_Draft_Contract</targetReference>
@@ -199,7 +315,7 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>InvalidDraft</status>
     <textTemplates>
         <name>Emailsubject</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>
