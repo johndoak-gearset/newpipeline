@@ -86,9 +86,9 @@
                 <identifier>RecordOwnerIdField</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!$User.Email}</leftValue>
-                        <operator>CONTAINS</operator>
-                        <rightValue>sales@gearset.com</rightValue>
+                        <leftValue>{!$User.Profile.Name}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Sales</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
@@ -140,10 +140,6 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-3e6be8ce-ccb1-4d39-91c5-94773689982b</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>horizontalAlignment</name>
-                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
