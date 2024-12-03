@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Who_is_SM__c</fullName>
+    <description>Who is the responsible Site Manager for this account</description>
+    <externalId>false</externalId>
+    <label>Who is SM</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ben</fullName>
+                <default>false</default>
+                <label>Ben</label>
+            </value>
+            <value>
+                <fullName>Bonnie</fullName>
+                <default>false</default>
+                <label>Bonnie</label>
+            </value>
+            <value>
+                <fullName>Glenn</fullName>
+                <default>false</default>
+                <label>Glenn</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
