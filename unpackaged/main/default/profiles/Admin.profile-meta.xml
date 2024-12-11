@@ -13,6 +13,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Account_Meeting_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Account_Priority__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Account.DiscountPercentage__c</field>
         <readable>true</readable>
@@ -1710,11 +1720,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.NumberOfEmployees</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Account.NumberofLocations__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
