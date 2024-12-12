@@ -59,7 +59,7 @@
         <description>Your account have expanded to new products, reach out to check they have everything they need</description>
         <name>New_products_bought</name>
         <label>New products bought</label>
-        <locationX>842</locationX>
+        <locationX>578</locationX>
         <locationY>647</locationY>
         <actionName>FeedItem.NewTaskFromFeedItem</actionName>
         <actionType>quickAction</actionType>
@@ -146,7 +146,7 @@
     <actionCalls>
         <name>Spicy_meatball</name>
         <label>Spicy meatball</label>
-        <locationX>512</locationX>
+        <locationX>380</locationX>
         <locationY>431</locationY>
         <actionName>chatterPost</actionName>
         <actionType>chatterPost</actionType>
@@ -170,7 +170,7 @@
     </actionCalls>
     <apiVersion>56.0</apiVersion>
     <decisions>
-        <description>Over 75k value</description>
+        <description>Over 100k value</description>
         <name>Enterprise_value</name>
         <label>Enterprise value</label>
         <locationX>182</locationX>
@@ -186,7 +186,7 @@
                 <leftValueReference>$Record.Amount</leftValueReference>
                 <operator>LessThan</operator>
                 <rightValue>
-                    <numberValue>75000.0</numberValue>
+                    <numberValue>100000.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -198,7 +198,7 @@
     <decisions>
         <name>Opp_type</name>
         <label>Opp type</label>
-        <locationX>512</locationX>
+        <locationX>380</locationX>
         <locationY>539</locationY>
         <defaultConnector>
             <targetReference>New_products_bought</targetReference>
@@ -262,7 +262,7 @@
         <description>Create a draft contract when an opportunity is won and is over 25,000</description>
         <name>Create_Draft_Contract</name>
         <label>Create Draft Contract</label>
-        <locationX>512</locationX>
+        <locationX>380</locationX>
         <locationY>323</locationY>
         <connector>
             <targetReference>Spicy_meatball</targetReference>
@@ -283,7 +283,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <start>
-        <locationX>386</locationX>
+        <locationX>254</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Create_Draft_Contract</targetReference>
